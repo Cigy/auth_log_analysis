@@ -23,13 +23,12 @@
 
 def analyse_auth_log(filepath):
 
-# 1. Open handle to the file
-
-    auth_log_file = open(filepath, "r")
-    print(auth_log_file.read())
-
-# 2. Start from beginning, iterate through whole file line by line
-# 3. Read data into dictionary
+    with open(filepath, "r") as auth_log_file:
+        for line_num, line in enumerate(auth_log_file, start=1):
+            if "sshd[" in line:
+                print("True")
+            else:
+                print(f"Omitting Line #{line_num}, not an sshd log message ")
 
 def main():
     auth_log_file_path = input("Enter the auth log file path: ")
